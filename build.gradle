@@ -29,6 +29,10 @@ repositories {
 
 //프로젝트 개발에 필요한 의존성들을 선언하는 곳
 dependencies {
-    compileOnly('org.springframework.boot:spring-boot-starter-web')
-    testCompileOnly('org.springframework.boot:spring-boot-starter-test')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //아래 책에 있는 코드 그대로 작성하면 무슨 이유인지는 모르겠지만 애플리케이션은 정상적으로 실행되지만, 테스트 코드는 오류가 발생하며 실행이 되지 않는다.
+    //위 코드로 수정해주면 테스트까지 정상적으로 실행이 된다.
+    //compileOnly('org.springframework.boot:spring-boot-starter-web')
+    //testCompileOnly('org.springframework.boot:spring-boot-starter-test')
 }
