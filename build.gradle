@@ -35,4 +35,6 @@ dependencies {
     //위 코드로 수정해주면 테스트까지 정상적으로 실행이 된다.
     //compileOnly('org.springframework.boot:spring-boot-starter-web')
     //testCompileOnly('org.springframework.boot:spring-boot-starter-test')
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
 }
