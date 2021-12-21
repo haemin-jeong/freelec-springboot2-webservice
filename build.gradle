@@ -52,4 +52,6 @@ dependencies {
 
     //세션을 DB에 저장하기위해 필요한 의존성
     implementation 'org.springframework.session:spring-session-jdbc'
+
+    testImplementation 'org.springframework.security:spring-security-test'
 }
