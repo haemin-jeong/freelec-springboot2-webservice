@@ -73,3 +73,39 @@ chmod 700 ~/.ssh/config
 ```
 위와 같은 설정 과정을 거치면 `ssh config에 등록한 서비스명`으로 EC2에 접속할 수 있게 된다.  
 예를 들어 앞서 config 파일에 Host를 hello로 등록했다면 `ssh hello` 로 접속할 수 있다.
+
+## 아마존 리눅스 서버 생성시 꼭 해야하는 설정
+
+### 자바8 설치
+Java 8 설치
+```
+sudo yum install -y java-1.8.0-openjdk-devel.x86_64
+```
+Java 버전 8로 변경
+```
+sudo /usr/sbin/alternatives --config java
+```
+
+### 타임존 변경
+EC2 서버의 기본 시간대는 UTC이기 떄문에 한국과 9시간의 차이가 난다. 그렇기 떄문에 서버의 타임존을 KST(한국 시간)으로 변경해줘야 한다.
+```
+타임존 설정
+sudo rm /etc/localtime
+sudo ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+타임존 확인
+date
+```
+
+### Hostname 변경
+여러 서버를 관리 중일 경우 터미널에서 IP만으로는 어떤 서비스의 서버인지 구분하기 어렵다. Hostname을 변경하여 IP가 아닌 서비스 명으로 표시되도록 변경할 수 있다.
+
+참고: 책의 내용은 Amazon Linux AMI 기준으로 나와있는데 현재 Amazon Linux2로만 생성이 가능하다. 그런데 Amazon Linux2 호스트명 변경 방법이 책에 나외있는 방법과 다르다. hostnamectl 명령어를 이용해서 변경해야 한다.
+
+변경 방법 : https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/set-hostname.html
+
+Hostname을 변경 후에 호스트 주소를 찾을 때 가장 먼저 검색 해보는 /etc/hosts에도 변경한 hostname을 등록해줘야 한다.  
+
+/etc/hosts 파일을 열어 `127.0.0.1 등록한 HOSTNAME`을 추가해주자.
+
+`curl 등록한 HOSTNAME`명령어를 사용하여 정상적으로 등록되었는지 확인하자.
